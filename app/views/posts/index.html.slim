@@ -1,0 +1,10 @@
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      h1 Posts
+      .text-right
+        =link_to "New Post", new_post_path, remote: true, class: "btn btn-primary"
+      br
+      .post-wrapper
+        -@posts.each do |post|
+          =render "posts", :post => post

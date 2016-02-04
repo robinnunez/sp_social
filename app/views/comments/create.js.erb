@@ -1,0 +1,2 @@
+$("#<%=@comment.post_id%>_post_panel").find('.comment-wrapper').append("<%=j render 'posts/comments', :comment => @comment%>");
+$("textarea").val('');

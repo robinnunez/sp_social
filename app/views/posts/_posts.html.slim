@@ -1,0 +1,19 @@
+div id="#{post.id}_post_panel"
+  =image_tag post.photo.url, :class => "img-responsive" if post.photo.present?
+  -if post_buttons(post.user_id)
+    =link_to "Edit", edit_post_path(post), class: "btn btn-primary", remote: true
+    =link_to "Delete",post,:method => :delete, data: {:confirm => "Are you sure ?", remote: true}, class: "btn btn-danger"
+  hr
+  h3 COMMENTS
+  .comment-wrapper
+    -post.comments.each do |comment|
+      =render 'comments', :comment => comment
+
+  =form_for(@comment, remote: true, html: { multipart: true }) do |f|
+    =f.hidden_field :user_id, value: current_user.id
+    =f.hidden_field :post_id, value: post.id
+    .form-group
+      =f.label :comment, :class => "control-label"
+      =f.text_area :comment, :class => "form-control"
+
+    =f.submit "Comment", :class => "btn btn-sm btn-primary"

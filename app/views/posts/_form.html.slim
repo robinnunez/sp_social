@@ -1,0 +1,15 @@
+=form_for(@post, remote: true, html: { multipart: true }) do |f|
+  .modal-header
+    button type="button" class="close" data-dismiss="modal" aria-label="Close"
+      span &times;
+    h4.modal-title
+      | Form
+      =@post.id
+  .modal-body
+    =f.hidden_field :user_id, value: current_user.id
+    .form-group
+      =f.label :photo, class: "control-label"
+      =f.file_field :photo, class: "form-control"
+  .modal-footer.text-right
+    =f.submit "Save", class: "btn btn-primary"
+  
